@@ -3,7 +3,7 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source "$CURRENT_DIR/scripts/helpers.sh"
 
-git_branch="#($CURRENT_DIR/scripts/branch)"
+git_branch="#($CURRENT_DIR/scripts/branch.sh)"
 git_branch_interpolation="\#{git_branch}"
 
 do_interpolation() {
