@@ -6,7 +6,7 @@ source "$CURRENT_DIR/helpers.sh"
 
 print_git_branch() {
   local working_dir=$(tmux display-message -p "#{pane_current_path}")
-  local branch=$(cd $working_dir && git branch)
+  local branch=$(cd "$working_dir" && git symbolic-ref --short HEAD)
   echo $branch
 }
 
