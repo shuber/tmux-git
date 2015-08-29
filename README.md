@@ -15,11 +15,11 @@ set -g @plugin "shuber/tmux-git"
 ## Interpolation variables
 
 * `#{git_branch}` - display the currently checked out git branch
-* [TODO] `#{git_dirty}` - display a flag if their are uncommitted changes
+* [TODO] `#{git_dirty}` - display a flag if there are uncommitted changes
 * [TODO] `#{git_ahead}` - display number of commits ahead of master
 * [TODO] `#{git_behind}` - display number of commits behind master
 * [TODO] `#{git_sha}` - display the sha of the latest commit
-* [TODO] `#{git_short_sha}` - display the shortened sha of the latest commit
+* [TODO] `#{git_short_sha}` - display the short sha of the latest commit
 
 
 ## Usage
