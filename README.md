@@ -31,10 +31,16 @@ set -g status-left "#{git_dirty}"
 set -g status-right "#{git_ahead}/#{git_behind} | #{git_branch}"
 ```
 
-You can also adjust the `status-interval` refresh rate if necessary
+You can also adjust the `status-interval` refresh rate as necessary
 
 ```tmux
 set -g status-interval 15 # refresh every 15 seconds
+```
+
+Or manually refresh the status line when instead
+
+```tmux
+tmux refresh-client -S
 ```
 
 
