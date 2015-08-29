@@ -39,7 +39,7 @@ set -g status-interval 15 # refresh every 15 seconds
 
 Or manually refresh the status line when instead
 
-```tmux
+```bash
 tmux refresh-client -S
 ```
 
