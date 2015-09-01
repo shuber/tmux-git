@@ -7,21 +7,24 @@ source "$CURRENT_DIR/scripts/helpers.sh"
 git_branch="#($CURRENT_DIR/scripts/branch.sh)"
 git_branch_interpolation="\#{git_branch}"
 
-do_interpolation() {
+interpolate_variables() {
 	local string=$1
 	local interpolated=${string/$git_branch_interpolation/$git_branch}
+
 	echo $interpolated
 }
 
-update_tmux_option() {
+interpolate_tmux_option() {
 	local option=$1
-	local option_value=$(get_tmux_option "$option")
-	local new_option_value=$(do_interpolation "$option_value")
-	set_tmux_option "$option" "$new_option_value"
+	local value=$(get_tmux_option "$option")
+	local interpolated=$(interpolate_variables "$value")
+
+	set_tmux_option "$option" "$interpolated"
 }
 
 main() {
-	update_tmux_option "status-right"
-	update_tmux_option "status-left"
+	interpolate_tmux_option "status-right"
+	interpolate_tmux_option "status-left"
 }
+
 main
