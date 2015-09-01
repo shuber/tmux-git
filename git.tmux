@@ -13,7 +13,7 @@ git_sha_interpolation="\#{git_sha}"
 git_shortsha="#($CURRENT_DIR/scripts/shortsha.sh)"
 git_shortsha_interpolation="\#{git_shortsha}"
 
-git_subject="#($CURRENT_DIR/scripts/subject)"
+git_subject="#($CURRENT_DIR/scripts/subject.sh)"
 git_subject_interpolation="\#{git_subject}"
 
 interpolate_variables() {
