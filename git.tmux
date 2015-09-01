@@ -8,7 +8,7 @@ git_branch="#($CURRENT_DIR/scripts/branch.sh)"
 git_branch_interpolation="\#{git_branch}"
 
 git_sha="#($CURRENT_DIR/scripts/sha.sh)"
-git_sha="\#{git_sha}"
+git_sha_interpolation="\#{git_sha}"
 
 interpolate_variables() {
 	local string=$1
