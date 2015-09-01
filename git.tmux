@@ -13,11 +13,15 @@ git_sha_interpolation="\#{git_sha}"
 git_shortsha="#($CURRENT_DIR/scripts/shortsha.sh)"
 git_shortsha_interpolation="\#{git_shortsha}"
 
+git_subject="#($CURRENT_DIR/scripts/subject)"
+git_subject_interpolation="\#{git_subject}"
+
 interpolate_variables() {
 	local string=$1
 	local branch_interpolated=${string/$git_branch_interpolation/$git_branch}
 	local sha_interpolated=${branch_interpolated/$git_sha_interpolation/$git_sha}
-	local all_interpolated=${sha_interpolated/$git_shortsha_interpolation/$git_shortsha}
+	local shortsha_interpolated=${sha_interpolated/$git_shortsha_interpolation/$git_shortsha}
+	local all_interpolated=${shortsha_interpolated/$git_subject_interpolation/$git_subject}
 
 	echo $all_interpolated
 }

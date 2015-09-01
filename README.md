@@ -17,10 +17,10 @@ set -g @plugin "shuber/tmux-git"
 * `#{git_branch}` - display the currently checked out git branch
 * `#{git_sha}` - display the sha of the latest commit
 * `#{git_shortsha}` - display the short sha of the latest commit
+* `#{git_subject}` - display the last commit subject (short message)
 * [TODO] `#{git_additions}` - display number of uncommitted additions
 * [TODO] `#{git_ahead}` - display number of commits ahead of master
 * [TODO] `#{git_behind}` - display number of commits behind master
-* [TODO] `#{git_commit}` - display the last commit short message
 * [TODO] `#{git_deletions}` - display number of uncommitted deletions
 * [TODO] `#{git_dirty}` - display number of uncommitted dirty files if any
 
