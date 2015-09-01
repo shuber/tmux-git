@@ -7,11 +7,15 @@ source "$CURRENT_DIR/scripts/helpers.sh"
 git_branch="#($CURRENT_DIR/scripts/branch.sh)"
 git_branch_interpolation="\#{git_branch}"
 
+git_sha="#($CURRENT_DIR/scripts/sha.sh)"
+git_sha="\#{git_sha}"
+
 interpolate_variables() {
 	local string=$1
-	local interpolated=${string/$git_branch_interpolation/$git_branch}
+	local branch_interpolated=${string/$git_branch_interpolation/$git_branch}
+	local all_interpolated=${branch_interpolated/$git_sha_interpolation/$git_sha}
 
-	echo $interpolated
+	echo $all_interpolated
 }
 
 interpolate_tmux_option() {
