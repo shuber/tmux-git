@@ -40,7 +40,6 @@ print_status_right() {
     local insertions=$(echo "$dirty" | perl -pe "s/^.*?(\d+) insertion.*$/\1/")
     local deletions=$(echo "$dirty" | perl -pe "s/^.*?(\d+) deletion.*$/\1/")
 
-hi
     status_right="$branch_arrow$highlight $changes  $status_right"
 
     if [ "$deletions" != "$dirty" ]; then
