@@ -36,6 +36,8 @@ print_status_right() {
 
   if [ $dirty ]; then
     $status_right="$status_right DIRTY"
+  else
+    $status_right="$status_right NOT DIRTY"
   fi
 
   local interpolated=$(tmux display-message -p "$status_right")
