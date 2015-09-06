@@ -10,15 +10,15 @@ print_status_right() {
 
   local blue="4"
   local green="150"
-  local red="1"
+  local red="131"
   local yellow="3"
 
-  local dirty=$(cd "$working_dir" && git diff HEAD --shortstat | sed -e 's/[^0-9,]//g')
+  local dirty=$(cd "$working_dir" && git diff HEAD --shortstat)
   local head=$(cd "$working_dir" && git rev-parse @)
   local remote=$(cd "$working_dir" && git rev-parse @{u})
   local base=$(cd "$working_dir" && git merge-base @ @{u})
 
-  if [ $dirty ]; then # uncommitted changes
+  if [ "$dirty" ]; then # uncommitted changes
     local color=$yellow
   elif [ $head = $remote ]; then # up to date
     local color=$green
@@ -32,12 +32,15 @@ print_status_right() {
 
   local branch="#[fg=colour236,bg=colour$color] $branch_name"
   local branch_arrow="#[fg=colour$color,bg=colour237,nobold,nounderscore,noitalics]"
-  local status_right="$branch_arrow$branch"
+  local status_right="$branch"
 
-  if [ $dirty ]; then
-    status_right="$status_right DIRTY"
+  if [ "$dirty" ]; then
+    local changes=$(echo "$dirty" | perl -pe "s/.*?(\d+) file.*/\1/")
+    local insertions=$(echo "$dirty" | perl -pe "s/.*?(\d+) insertion.*/\1/")
+    local deletions=$(echo "$dirty" | perl -pe "s/.*?(\d+) deletion.*/\1/")
+    status_right="$branch_arrow $changes  $status_right"
   else
-    status_right="$status_right NOT DIRTY"
+    status_right="$branch_arrow$status_right"
   fi
 
   local interpolated=$(tmux display-message -p "$status_right")
