@@ -29,6 +29,7 @@ print_status_right() {
   else # diverged
     local color=$red
   fi
+
   local highlight="#[fg=colour236,bg=colour$color]"
   local branch="$highlight $branch_name"
   local branch_arrow="#[fg=colour$color,bg=colour237,nobold,nounderscore,noitalics]"
