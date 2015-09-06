@@ -40,14 +40,15 @@ print_status_right() {
     local insertions=$(echo "$dirty" | perl -pe "s/^.*?(\d+) insertion.*$/\1/")
     local deletions=$(echo "$dirty" | perl -pe "s/^.*?(\d+) deletion.*$/\1/")
 
+hi
     status_right="$branch_arrow$highlight $changes  $status_right"
 
-    if [ "$deletions" ]; then
+    if [ "$deletions" != "$dirty" ]; then
       local deletion_status="#[fg=colour$red,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour$red] $deletions #[fg=colour236,bg=colour$red] - #[fg=colour237,bg=colour$red,nobold,nounderscore,noitalics]"
       status_right="$deletion_status$status_right"
     fi
 
-    if [ "$insertions" ]; then
+    if [ "$insertions" != "$dirty" ]; then
       local insertion_status="#[fg=colour$green,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour$green] $insertions #[fg=colour236,bg=colour$green] - #[fg=colour237,bg=colour$green,nobold,nounderscore,noitalics]"
       status_right="$insertion_status$status_right"
     fi
