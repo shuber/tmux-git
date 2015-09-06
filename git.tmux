@@ -16,8 +16,8 @@ git_shortsha_interpolation="\#{git_shortsha}"
 git_subject="#($CURRENT_DIR/scripts/subject.sh)"
 git_subject_interpolation="\#{git_subject}"
 
-status_left="#($CURRENT_DIR/scripts/status_left.sh)"
-status_left_interpolation="\#{status_left}"
+status_right="#($CURRENT_DIR/scripts/status_right.sh)"
+status_right_interpolation="\#{status_right}"
 
 interpolate_variables() {
 	local string=$1
@@ -25,7 +25,7 @@ interpolate_variables() {
 	local sha_interpolated=${branch_interpolated/$git_sha_interpolation/$git_sha}
 	local shortsha_interpolated=${sha_interpolated/$git_shortsha_interpolation/$git_shortsha}
 	local subject_interpolated=${shortsha_interpolated/$git_subject_interpolation/$git_subject}
-	local all_interpolated=${subject_interpolated/$status_left_interpolation/$status_left}
+	local all_interpolated=${subject_interpolated/$status_right_interpolation/$status_right}
 
 	echo $all_interpolated
 }
