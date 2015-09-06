@@ -44,7 +44,7 @@ print_status_right() {
 
     if [ "$deletions" ]; then
       local deletion_status="#[fg=colour$red,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour$red] $deletions #[fg=colour236,bg=colour$red] - "
-      status_right="$spacer$status_right"
+      status_right="$deletion_status$spacer$status_right"
     fi
   else
     status_right="$branch_arrow$status_right"
