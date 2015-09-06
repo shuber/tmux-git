@@ -50,7 +50,7 @@ print_status_right() {
     fi
 
     if [ "$insertions" != "$dirty" ]; then
-      local insertion_status="#[fg=colour$green,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour$green] $insertions #[fg=colour236,bg=colour$green] - #[fg=colour237,bg=colour$green,nobold,nounderscore,noitalics]"
+      local insertion_status="#[fg=colour$green,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour$green] $insertions #[fg=colour236,bg=colour$green] + #[fg=colour237,bg=colour$green,nobold,nounderscore,noitalics]"
       status_right="$insertion_status$status_right"
     fi
   else
