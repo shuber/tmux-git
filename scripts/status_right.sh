@@ -10,6 +10,7 @@ print_status_right() {
 
   local blue="4"
   local green="150"
+  local purple="5"
   local red="131"
   local yellow="3"
 
@@ -25,7 +26,7 @@ print_status_right() {
   elif [ $head = $base ]; then # need to pull
     local color=$blue
   elif [ $remote = $base ]; then # need to push
-    local color=$yellow
+    local color=$purple
   else # diverged
     local color=$red
   fi
