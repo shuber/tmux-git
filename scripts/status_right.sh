@@ -35,9 +35,9 @@ print_status_right() {
   local status_right="$branch_arrow$branch"
 
   if [ $dirty ]; then
-    $status_right="$status_right DIRTY"
+    status_right="$status_right DIRTY"
   else
-    $status_right="$status_right NOT DIRTY"
+    status_right="$status_right NOT DIRTY"
   fi
 
   local interpolated=$(tmux display-message -p "$status_right")
