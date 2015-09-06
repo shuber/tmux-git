@@ -30,7 +30,8 @@ print_status_right() {
     local color=$red
   fi
 
-  local branch="#[fg=colour236,bg=colour$color] $branch_name"
+  local highlight="#[fg=colour236,bg=colour$color]"
+  local branch="$highlight $branch_name"
   local branch_arrow="#[fg=colour$color,bg=colour237,nobold,nounderscore,noitalics]"
   local status_right="$branch"
 
@@ -38,7 +39,8 @@ print_status_right() {
     local changes=$(echo "$dirty" | perl -pe "s/.*?(\d+) file.*/\1/")
     local insertions=$(echo "$dirty" | perl -pe "s/.*?(\d+) insertion.*/\1/")
     local deletions=$(echo "$dirty" | perl -pe "s/.*?(\d+) deletion.*/\1/")
-    status_right="$branch_arrow $changes  $status_right"
+    status_right="$branch_arrow$highlight $changes  $status_right"
+    # hi
   else
     status_right="$branch_arrow$status_right"
   fi
