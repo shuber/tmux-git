@@ -16,6 +16,9 @@ git_shortsha_interpolation="\#{git_shortsha}"
 git_subject="#($CURRENT_DIR/scripts/subject.sh)"
 git_subject_interpolation="\#{git_subject}"
 
+status_left="#($CURRENT_DIR/scripts/status_left.sh)"
+status_left_interpolation="\#{status_left}"
+
 interpolate_variables() {
 	local string=$1
 	local branch_interpolated=${string/$git_branch_interpolation/$git_branch}
