@@ -29,7 +29,6 @@ print_status_right() {
   else # diverged
     local color=$red
   fi
-
   local highlight="#[fg=colour236,bg=colour$color]"
   local branch="$highlight $branch_name"
   local branch_arrow="#[fg=colour$color,bg=colour237,nobold,nounderscore,noitalics]"
@@ -37,9 +36,9 @@ print_status_right() {
   local spacer="#[fg=colour237,bg=colour131,nobold,nounderscore,noitalics]"
 
   if [ "$dirty" ]; then
-    local changes=$(echo "$dirty" | perl -pe "s/.*?(\d+) file.*/\1/")
-    local insertions=$(echo "$dirty" | perl -pe "s/.*?(\d+) insertion.*/\1/")
-    local deletions=$(echo "$dirty" | perl -pe "s/.*?(\d+) deletion.*/\1/")
+    local changes=$(echo "$dirty" | perl -pe "s/^.*?(\d+) file.*$/\1/")
+    local insertions=$(echo "$dirty" | perl -pe "s/^.*?(\d+) insertion.*$/\1/")
+    local deletions=$(echo "$dirty" | perl -pe "s/^.*?(\d+) deletion.*$/\1/")
 
     status_right="$branch_arrow$highlight $changes  $status_right"
 
@@ -57,8 +56,6 @@ print_status_right() {
   fi
 
   local interpolated=$(tmux display-message -p "$status_right")
-
-  # "#[fg=colour249,bg=colour237] %Y-%m-%d  %I:%M #[fg=colour4,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour150,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour150] 18 #[fg=colour236,bg=colour150] + #[fg=colour237,bg=colour150,nobold,nounderscore,noitalics]#[fg=colour131,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour131] 37 #[fg=colour236,bg=colour131] - #[fg=colour237,bg=colour131,nobold,nounderscore,noitalics]#[fg=colour3,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour3] #{git_branch}#[fg=colour3,bg=colour3] #()"
 
   echo $interpolated
 }
