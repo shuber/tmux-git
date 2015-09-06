@@ -13,11 +13,14 @@ print_status_right() {
   local red="1"
   local yellow="3"
 
+  local dirty=$(cd "$working_dir" && git diff HEAD --shortstat | sed -e 's/[^0-9,]//g')
   local head=$(cd "$working_dir" && git rev-parse @)
   local remote=$(cd "$working_dir" && git rev-parse @{u})
   local base=$(cd "$working_dir" && git merge-base @ @{u})
 
-  if [ $head = $remote ]; then # up to date
+  if [ $dirty ]; then # uncommitted changes
+    local color=$yellow
+  elif [ $head = $remote ]; then # up to date
     local color=$green
   elif [ $head = $base ]; then # need to pull
     local color=$blue
@@ -29,8 +32,12 @@ print_status_right() {
 
   local branch="#[fg=colour236,bg=colour$color] $branch_name"
   local branch_arrow="#[fg=colour$color,bg=colour237,nobold,nounderscore,noitalics]"
-
   local status_right="$branch_arrow$branch"
+
+  if [ $dirty ]; then
+    $status_right="$status_right DIRTY"
+  fi
+
   local interpolated=$(tmux display-message -p "$status_right")
 
   # "#[fg=colour249,bg=colour237] %Y-%m-%d  %I:%M #[fg=colour4,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour150,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour150] 18 #[fg=colour236,bg=colour150] + #[fg=colour237,bg=colour150,nobold,nounderscore,noitalics]#[fg=colour131,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour131] 37 #[fg=colour236,bg=colour131] - #[fg=colour237,bg=colour131,nobold,nounderscore,noitalics]#[fg=colour3,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour3] #{git_branch}#[fg=colour3,bg=colour3] #()"
