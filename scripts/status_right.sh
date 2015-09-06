@@ -34,13 +34,18 @@ print_status_right() {
   local branch="$highlight $branch_name"
   local branch_arrow="#[fg=colour$color,bg=colour237,nobold,nounderscore,noitalics]"
   local status_right="$branch"
+  local spacer="#[fg=colour237,bg=colour131,nobold,nounderscore,noitalics]"
 
   if [ "$dirty" ]; then
     local changes=$(echo "$dirty" | perl -pe "s/.*?(\d+) file.*/\1/")
     local insertions=$(echo "$dirty" | perl -pe "s/.*?(\d+) insertion.*/\1/")
     local deletions=$(echo "$dirty" | perl -pe "s/.*?(\d+) deletion.*/\1/")
     status_right="$branch_arrow$highlight $changes  $status_right"
-    # hi
+
+    if [ "$deletions" ]; then
+      local deletion_status="#[fg=colour$red,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour$red] $deletions #[fg=colour236,bg=colour$red] - "
+      status_right="$spacer$status_right"
+    fi
   else
     status_right="$branch_arrow$status_right"
   fi
