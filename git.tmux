@@ -24,7 +24,8 @@ interpolate_variables() {
 	local branch_interpolated=${string/$git_branch_interpolation/$git_branch}
 	local sha_interpolated=${branch_interpolated/$git_sha_interpolation/$git_sha}
 	local shortsha_interpolated=${sha_interpolated/$git_shortsha_interpolation/$git_shortsha}
-	local all_interpolated=${shortsha_interpolated/$git_subject_interpolation/$git_subject}
+	local subject_interpolated=${shortsha_interpolated/$git_subject_interpolation/$git_subject}
+	local all_interpolated=${subject_interpolated/$status_left_interpolation/$status_left}
 
 	echo $all_interpolated
 }
