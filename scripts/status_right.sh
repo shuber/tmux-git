@@ -15,6 +15,7 @@ print_status_right() {
   local yellow="3"
 
   local dirty=$(cd "$working_dir" && git diff HEAD --shortstat)
+  local staged=$(cd "$working_dir" && git diff --cached --numstat | wc -l)
   local head=$(cd "$working_dir" && git rev-parse @)
   local remote=$(cd "$working_dir" && git rev-parse @{u})
   local base=$(cd "$working_dir" && git merge-base @ @{u})
@@ -55,6 +56,13 @@ print_status_right() {
     fi
   else
     status_right="$branch_arrow$status_right"
+  fi
+
+  if [ "$staged" -ne "0" ]; then
+      # draw staged files count in blue
+      # local files=$(echo "$staged" | perl -pe "s/^.*?(\d+) file.*$/\1/")
+      local staged_status="#[fg=colour$blue,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour$blue] $staged #[fg=colour236,bg=colour$blue] ± #[fg=colour237,bg=colour$blue,nobold,nounderscore,noitalics]"
+      status_right="$staged_status$status_right"
   fi
 
   local interpolated=$(tmux display-message -p "$status_right")
