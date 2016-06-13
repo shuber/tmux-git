@@ -60,11 +60,21 @@ print_status_right() {
   fi
 
   if [ "$staged_files" -ne "0" ]; then
-      local staged_files=$(echo "$staged" | perl -pe "s/^.*?(\d+) files? changed.*$/\1/")
-      local staged_insertions=$(echo "$staged" | perl -pe "s/^.*?(\d+) insertion.*$/\1/")
-      local staged_deletions=$(echo "$staged" | perl -pe "s/^.*?(\d+) deletion.*$/\1/")
-      local staged_status="#[fg=colour$blue,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour$blue] $staged_files  $staged_insertions+  $staged_deletions- #[fg=colour237,bg=colour$blue,nobold,nounderscore,noitalics]"
-      status_right="$staged_status$status_right"
+    local staged_files=$(echo "$staged" | perl -pe "s/^.*?(\d+) file? changed.*$/\1/")
+    local number="^[0-9]+$"
+
+    local staged_insertions=$(echo "$staged" | perl -pe "s/^.*?(\d+) insertion.*$/\1/")
+    if ! [[ "$staged_insertions" =~ $number ]] ; then
+      staged_insertions=0
+    fi
+
+    local staged_deletions=$(echo "$staged" | perl -pe "s/^.*?(\d+) deletion.*$/\1/")
+    if ! [[ "$staged_deletions" =~ $number ]] ; then
+      staged_deletions=0
+    fi
+
+    local staged_status="#[fg=colour$blue,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour$blue] $staged_files  $staged_insertions+  $staged_deletions- #[fg=colour237,bg=colour$blue,nobold,nounderscore,noitalics]"
+    status_right="$staged_status$status_right"
   fi
 
   local interpolated=$(tmux display-message -p "$status_right")
