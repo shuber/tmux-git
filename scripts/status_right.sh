@@ -25,9 +25,9 @@ print_status_right() {
   elif [ $head = $remote ]; then # up to date
     local color=$green
   elif [ $head = $base ]; then # need to pull
-    local color=$blue
-  elif [ $remote = $base ]; then # need to push
     local color=$purple
+  elif [ $remote = $base ]; then # need to push
+    local color=$blue
   else # diverged
     local color=$red
   fi
