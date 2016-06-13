@@ -60,7 +60,7 @@ print_status_right() {
   fi
 
   if [ "$staged_files" -ne "0" ]; then
-    local staged_files=$(echo "$staged" | perl -pe "s/^.*?(\d+) file? changed.*$/\1/")
+    local staged_files=$(echo "$staged" | perl -pe "s/^.*?(\d+) files* changed.*$/\1/")
     local number="^[0-9]+$"
 
     local staged_insertions=$(echo "$staged" | perl -pe "s/^.*?(\d+) insertion.*$/\1/")
