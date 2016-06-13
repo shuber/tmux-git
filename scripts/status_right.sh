@@ -9,9 +9,9 @@ print_status_right() {
   local branch_name=$(cd "$working_dir" && git symbolic-ref --short HEAD)
 
   local blue="4"
-  local green="150"
+  local green="2"
   local purple="5"
-  local red="131"
+  local red="1"
   local yellow="3"
 
   local dirty=$(cd "$working_dir" && git diff HEAD --shortstat)
@@ -35,7 +35,7 @@ print_status_right() {
   local branch="$highlight $branch_name"
   local branch_arrow="#[fg=colour$color,bg=colour237,nobold,nounderscore,noitalics]"
   local status_right="$branch"
-  local spacer="#[fg=colour237,bg=colour131,nobold,nounderscore,noitalics]"
+  local spacer="#[fg=colour237,bg=colour1,nobold,nounderscore,noitalics]"
 
   if [ "$dirty" ]; then
     local changes=$(echo "$dirty" | perl -pe "s/^.*?(\d+) file.*$/\1/")
