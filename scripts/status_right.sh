@@ -9,7 +9,7 @@ print_status_right() {
   local branch_name=$(cd "$working_dir" && git symbolic-ref --short HEAD)
 
   local blue="4"
-  local green="2"
+  local green="10"
   local purple="5"
   local red="1"
   local yellow="3"
